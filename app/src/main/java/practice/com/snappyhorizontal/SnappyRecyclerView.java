@@ -2,6 +2,7 @@ package practice.com.snappyhorizontal;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -24,7 +25,7 @@ public class SnappyRecyclerView extends RecyclerView {
   }
   @Override
   public void onScrolled(int dx, int dy) {
-    Log.d("Daman", "dx =" + dx + " dy = " + dy );
+    Log.d("DamanScroll", "dx =" + dx + " dy = " + dy );
     super.onScrolled(dx, dy);
   }
 
@@ -45,11 +46,21 @@ public class SnappyRecyclerView extends RecyclerView {
   @Override
   public boolean fling(int velocityX, int velocityY) {
     Log.d("Daman", "vx =" + velocityX + " vy = " + velocityY );
-    return super.fling(velocityX, velocityY);
+    int numberOfItems = getAdapter().getItemCount();
+    int destination = getAdapter().getItemCount();
+    LinearLayoutManager llm = (LinearLayoutManager) getLayoutManager();
+    int startposition = llm.findFirstVisibleItemPosition();
+    if(velocityX < 5000){
+      destination = startposition + 1;
+    }else {
+      if(startposition + 4 < numberOfItems) {
+        destination = startposition + 10;
+      }else {
+        destination = numberOfItems;
+      }
+    }
+    smoothScrollToPosition(destination);
+    return true;
   }
 
-  @Override
-  public boolean onNestedFling(View target, float velocityX, float velocityY, boolean consumed) {
-    return super.onNestedFling(target, velocityX, velocityY, consumed);
-  }
 }
