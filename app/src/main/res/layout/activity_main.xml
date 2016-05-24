@@ -13,6 +13,7 @@
   <practice.com.snappyhorizontal.SnappyRecyclerView
     android:id="@+id/recycler_view"
     android:orientation="horizontal"
+    android:background="@color/colorPrimaryDark"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
 </RelativeLayout>
