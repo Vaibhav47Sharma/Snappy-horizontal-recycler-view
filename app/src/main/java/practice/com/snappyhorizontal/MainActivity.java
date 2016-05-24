@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
     linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
     recyclerView.setLayoutManager(linearLayoutManager);
+    recyclerView.addItemDecoration(new HorizontalRecyclerDecoration(this));
     recyclerView.setAdapter(snappyRecyclerAdapter);
   }
 }
